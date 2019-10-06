@@ -1,68 +1,39 @@
 import React from 'react'
-import { Link } from 'gatsby'
 
-import { rhythm, scale } from '../utils/typography'
+import CssBaseline from '@material-ui/core/CssBaseline'
 
-export const Layout: React.FC = ({ location, title, children }) => {
-  const rootPath = `${__PATH_PREFIX__}/`
-  let header
+import { rhythm } from '../utils/typography'
+import { GlobalStyles } from './GlobalStyle'
+import { theme } from '../theme/muiTheme'
+import { ThemeProvider } from '@material-ui/core/styles'
+import { Header } from './Header'
 
-  if (location.pathname === rootPath) {
-    header = (
-      <h1
-        style={{
-          ...scale(1.5),
-          marginBottom: rhythm(1.5),
-          marginTop: 0,
-        }}
-      >
-        <Link
-          style={{
-            boxShadow: `none`,
-            textDecoration: `none`,
-            color: `inherit`,
-          }}
-          to={`/`}
-        >
-          {title}
-        </Link>
-      </h1>
-    )
-  } else {
-    header = (
-      <h3
-        style={{
-          fontFamily: `Montserrat, sans-serif`,
-          marginTop: 0,
-        }}
-      >
-        <Link
-          style={{
-            boxShadow: `none`,
-            textDecoration: `none`,
-            color: `inherit`,
-          }}
-          to={`/`}
-        >
-          {title}
-        </Link>
-      </h3>
-    )
-  }
+interface Props {
+  location?: Location
+  title: string
+  children: React.ReactNode | React.ReactNode[]
+}
+
+export const Layout: React.FC<Props> = ({ location, title, children }) => {
   return (
-    <div
-      style={{
-        marginLeft: `auto`,
-        marginRight: `auto`,
-        maxWidth: rhythm(24),
-        padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
-      }}
-    >
-      <header>{header}</header>
-      <main>{children}</main>
-      <footer>
-        © {new Date().getFullYear()} <em>Luke Rogerson</em>
-      </footer>
-    </div>
+    <>
+      <CssBaseline />
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
+        <div
+          style={{
+            marginLeft: `auto`,
+            marginRight: `auto`,
+            maxWidth: rhythm(24),
+            padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
+          }}
+        >
+          <header>
+            <Header title={title} location={location} />
+          </header>
+          <main>{children}</main>
+        </div>
+      </ThemeProvider>
+    </>
   )
 }

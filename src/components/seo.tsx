@@ -12,7 +12,7 @@ import Helmet from 'react-helmet'
 interface Props {
   description?: string
   lang?: string
-  meta?: any[]
+  meta?: []
   title: string
 }
 
