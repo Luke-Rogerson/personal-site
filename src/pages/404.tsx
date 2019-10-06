@@ -4,7 +4,18 @@ import { graphql } from 'gatsby'
 import { Layout } from '../components/layout'
 import SEO from '../components/seo'
 
-const NotFoundPage = ({ data, location }) => {
+interface Props {
+  data: {
+    site: {
+      siteMetadata: {
+        title: string
+      }
+    }
+  }
+  location: Location
+}
+
+const NotFoundPage: React.FC<Props> = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata.title
 
   return (

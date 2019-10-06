@@ -6,7 +6,21 @@ import { Layout } from '../components/layout'
 import SEO from '../components/seo'
 import { rhythm, scale } from '../utils/typography'
 
-const BlogPostTemplate = ({ location, data, pageContext }) => {
+interface Props {
+  location: Location
+  data: {
+    site: {
+      siteMetadata: {
+        title: string
+        author: string
+      }
+    }
+    markdownRemark: any
+  }
+  pageContext: any
+}
+
+const BlogPostTemplate: React.FC<Props> = ({ location, data, pageContext }) => {
   const post = data.markdownRemark
   const siteTitle = data.site.siteMetadata.title
   const { previous, next } = pageContext

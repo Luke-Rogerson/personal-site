@@ -3,11 +3,17 @@ import { Link } from 'gatsby'
 
 import { rhythm, scale } from '../utils/typography'
 
-export const Layout: React.FC = ({ location, title, children }) => {
+interface Props {
+  location?: Location
+  title?: string
+  children: React.ReactNode | React.ReactNode[]
+}
+
+export const Layout: React.FC<Props> = ({ location, title, children }) => {
   const rootPath = `${__PATH_PREFIX__}/`
   let header
 
-  if (location.pathname === rootPath) {
+  if (location && location.pathname === rootPath) {
     header = (
       <h1
         style={{
