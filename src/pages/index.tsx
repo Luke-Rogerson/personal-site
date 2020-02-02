@@ -1,17 +1,41 @@
 import React from 'react'
-import { Link } from 'gatsby'
+import { Link, graphql } from 'gatsby'
 
+import Bio from '../components/bio'
 import { Layout } from '../components/layout'
 import SEO from '../components/seo'
 
-export const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi guys</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
-)
+interface Props {
+  location: Location
+  data: {
+    site: {
+      siteMetadata: {
+        title: string
+      }
+    }
+  }
+}
 
-export default IndexPage
+const Home: React.FC<Props> = ({ location, data }) => {
+  const siteTitle = data.site.siteMetadata.title
+
+  return (
+    <Layout location={location} title={siteTitle}>
+      <SEO title='Home' />
+      <Bio />
+      <Link to='/blog'>Read my blog</Link>
+    </Layout>
+  )
+}
+
+export default Home
+
+export const pageQuery = graphql`
+  query {
+    site {
+      siteMetadata {
+        title
+      }
+    }
+  }
+`
