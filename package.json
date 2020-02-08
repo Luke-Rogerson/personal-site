@@ -52,6 +52,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-react": "^7.15.1",
+    "gatsby-plugin-s3": "^0.3.2",
     "prettier": "^1.18.2",
     "typescript": "^3.6.3"
   },
@@ -65,6 +66,7 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "lint": "eslint --ignore-path .gitignore . --ext ts --ext tsx --ext js --ext jsx",
-    "tsc": "tsc --noEmit"
+    "tsc": "tsc --noEmit",
+    "deploy": "gatsby-plugin-s3 deploy"
   }
 }
