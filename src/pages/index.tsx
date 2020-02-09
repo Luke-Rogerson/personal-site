@@ -1,9 +1,10 @@
 import React from 'react'
-import { Link, graphql } from 'gatsby'
+import { graphql } from 'gatsby'
 
 import Bio from '../components/bio'
 import { Layout } from '../components/layout'
 import SEO from '../components/seo'
+import { Contact } from '../components/Contact'
 
 interface Props {
   location: Location
@@ -23,7 +24,7 @@ const Home: React.FC<Props> = ({ location, data }) => {
     <Layout location={location} title={siteTitle}>
       <SEO title='Home' />
       <Bio />
-      <Link to='/blog'>Read my blog</Link>
+      <Contact />
     </Layout>
   )
 }
