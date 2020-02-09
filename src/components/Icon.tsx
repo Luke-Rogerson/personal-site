@@ -1,18 +1,33 @@
 import React from 'react'
+import { Link } from 'gatsby'
 import { SvgIcon, SvgIconProps } from '@material-ui/core'
 import styled from 'styled-components'
 
-// import { Link } from 'gatsby'
-//  <Link to='/blog'>Read my blog</Link>
-
-interface IconProps extends SvgIconProps {
-  href: string
+interface IconBaseProps extends SvgIconProps {
+  name: string
 }
+
+interface InternalLinkIcon extends IconBaseProps {
+  to: string
+  href?: undefined
+}
+
+interface ExternalLinkIcon extends IconBaseProps {
+  href: string
+  to?: undefined
+}
+
+type IconProps = InternalLinkIcon | ExternalLinkIcon
 
 const StyledAnchor = styled.a`
   box-shadow: none;
   color: initial;
   margin: 10px;
+`
+
+const StyledGatsbyLink = styled(Link)`
+  margin: 10px;
+  box-shadow: none;
 `
 
 const Wrapper = styled.div`
@@ -23,10 +38,29 @@ const Wrapper = styled.div`
   width: 40px;
   border-radius: 50%;
 `
+/** render a Gatsby Link if `to` prop is passed */
+const isPropsForGatsbyLink = (
+  props: InternalLinkIcon | ExternalLinkIcon
+): props is InternalLinkIcon => 'to' in props
 
-export const Icon: React.FC<IconProps> = ({ href, ...props }) => {
+export const Icon: React.FC<IconProps> = props => {
+  const { name } = props
+
+  if (isPropsForGatsbyLink(props)) {
+    const { to } = props
+    return (
+      <StyledGatsbyLink to={to}>
+        <title>{name}</title>
+        <Wrapper>
+          <SvgIcon style={{ width: '100%', height: '100%' }} {...props} />
+        </Wrapper>
+      </StyledGatsbyLink>
+    )
+  }
+  const { href } = props
   return (
-    <StyledAnchor href={href}>
+    <StyledAnchor href={href} target='_blank' rel='noopener noreferrer'>
+      <title>{name}</title>
       <Wrapper>
         <SvgIcon style={{ width: '100%', height: '100%' }} {...props} />
       </Wrapper>

@@ -14,7 +14,7 @@ const Icons = styled.div`
 export const Contact: React.FC = () => {
   return (
     <Icons>
-      <Icon name='Blog' component={CreateIcon} color='primary' href='ysy' />
+      <Icon name='Blog' component={CreateIcon} color='primary' to='/blog' />
       <Icon name='GitHub' component={GitHubIcon} href='www.github.com/' />
       <Icon name='LinkedIn' component={LinkedInIcon} href='www.linkedin.com/' />
     </Icons>
