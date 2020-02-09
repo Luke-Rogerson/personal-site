@@ -4,10 +4,9 @@ module.exports = {
     author: `Luke Rogerson`,
     description: `My personal site and blog`,
     siteUrl: `https://lukerogerson.me`,
-    social: {
-      github: `Luke-Rogerson`,
-      linkedin: `lukerogerson`,
-      twitter: `thelukerogerson`,
+    contacts: {
+      github: `https://github.com/Luke-Rogerson`,
+      linkedin: `https://www.linkedin.com/in/lukerogerson/`,
     },
   },
   plugins: [
