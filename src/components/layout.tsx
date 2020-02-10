@@ -1,6 +1,5 @@
 import React from 'react'
 import { ThemeProvider as MUIThemeProvider } from '@material-ui/core/styles'
-import CssBaseline from '@material-ui/core/CssBaseline'
 import { ThemeProvider as SCThemeProvider } from 'styled-components'
 
 import { rhythm } from '../utils/typography'
@@ -17,7 +16,6 @@ interface Props {
 export const Layout: React.FC<Props> = ({ location, title, children }) => {
   return (
     <>
-      <CssBaseline />
       <SCThemeProvider theme={theme}>
         <MUIThemeProvider theme={MUITheme}>
           <GlobalStyles />
