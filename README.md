@@ -11,7 +11,7 @@ My name is Luke. I'm a full-stack software engineer, based in London, UK.
 
 ## Where?
 
-You can find the site [here](lukerogerson.me). Please take a look!
+You can find the site [here](https://lukerogerson.me). Please take a look!
 
 ## What?
 
