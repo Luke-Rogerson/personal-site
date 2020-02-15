@@ -7,6 +7,7 @@ module.exports = {
     contacts: {
       github: `https://github.com/Luke-Rogerson`,
       linkedin: `https://www.linkedin.com/in/lukerogerson/`,
+      email: `contact@lukerogerson.me`,
     },
   },
   plugins: [
