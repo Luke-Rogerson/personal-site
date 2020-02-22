@@ -1,21 +1,25 @@
-import React from 'react'
-import { Link } from 'gatsby'
+import React, { AnchorHTMLAttributes } from 'react'
+import { Link, GatsbyLinkProps } from 'gatsby'
 import { SvgIcon, SvgIconProps } from '@material-ui/core'
 import styled from 'styled-components'
 
-interface IconBaseProps extends SvgIconProps {
+type BaseIconProps = {
   name: string
 }
 
-interface InternalLinkIcon extends IconBaseProps {
-  to: string
-  href?: undefined
-}
+type InternalLinkIcon = BaseIconProps &
+  GatsbyLinkProps<unknown> &
+  SvgIconProps & {
+    to: string
+    href?: undefined
+  }
 
-interface ExternalLinkIcon extends IconBaseProps {
-  href: string
-  to?: undefined
-}
+type ExternalLinkIcon = BaseIconProps &
+  AnchorHTMLAttributes<HTMLAnchorElement> &
+  SvgIconProps & {
+    href: string
+    to?: undefined
+  }
 
 type IconProps = InternalLinkIcon | ExternalLinkIcon
 
