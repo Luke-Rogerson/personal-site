@@ -1,12 +1,12 @@
 ---
 title: Conditionally render a React component with TypeScript type guards
 date: '2020-02-22T14:45:00.284Z'
-description: It's easy to type a component to accepts different props
+description: It's easy to type a component to accept different props
 ---
 
 <img src="https://images.unsplash.com/photo-1529982971869-586342d344b8?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1500&amp;q=80" alt="A Highland Cow" style="zoom:80%;" />
 
-Building [my website](www.lukerogerson.me), I wanted to have an `<Icon />` component that showed an icon image and **either** navigated somewhere internally **or** linked to an external website.
+Building [my website](/), I wanted to have an `<Icon />` component that showed an icon image and **either** navigated somewhere internally **or** linked to an external website.
 
 For this to work, my `<Icon />` component needs to return a [Gatsby Link component](https://www.gatsbyjs.org/docs/gatsby-link/) for internal navigation, or an `<a>` tag for outside websites. This can be accomplished nicely (and safely!) in TypeScript.
 
