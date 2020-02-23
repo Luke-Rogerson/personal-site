@@ -46,11 +46,11 @@ We then have a "guard" function to check if `to` exists in our props. We want to
 
 All that's left for us to do is to pass our `<Icon />` props to this function within our component, so that we can conditionally render the kind we want based only on the props!
 
-```react
+```typescript
 const Icon: React.FC<IconProps> = props => {
- if (isPropsForGatsbyLink(props)) {
-  	// ... return a Gatsby Link
- }
+  if (isPropsForGatsbyLink(props)) {
+    // ... return a Gatsby Link
+  }
   // otherwise, return an anchor tag
 }
 ```
