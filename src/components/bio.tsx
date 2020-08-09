@@ -6,20 +6,29 @@ const Info = styled.div`
   flex-direction: column;
 `
 
-const Bio = () => {
+const Bio: React.FC = () => {
   return (
     <Info>
       <p>
-        I am an entreprenerial and motivated full-stack software engineer. I spend most of
-        my week working with TypeScript, React Native and GraphQL 📈
+        I am an entrepreneurial and motivated full-stack software engineer, with a wealth
+        of experience in the JavaScript ecosystem - particularly in React Native, GraphQL
+        and Node.js. 📈
       </p>
       <p>
-        In another life, I was a co-owner, teacher and manager of an educational startup
-        in China 🇨🇳
+        I love working with strongly-typed languages, especially TypeScript and more
+        recently Go. I have worked with Swift and Java, and I also enjoy DevOps-type work,
+        including AWS and creating mobile CI/CD pipelines. 🧱
       </p>
       <p>
-        I am passionate about technology and education. I love always learning something
-        new! 学
+        My previous background is in education, where I was a co-owner, teacher and
+        manager of an educational startup in China. I love sharing my knowledge with
+        others, and have this year been teaching refugees and other under-represented
+        people in tech how to code. 🖥
+      </p>
+      <p>
+        I enjoy exercising and the outdoors, discussing things like football, tech and
+        politics (mainly UK and US), improving my Chinese and always learning something
+        new! 🚀
       </p>
     </Info>
   )
