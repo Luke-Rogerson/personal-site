@@ -15,6 +15,8 @@ const Container = styled.div`
   margin-bottom: 20px;
 `
 
+declare const __PATH_PREFIX__: string
+
 export const Header: React.FC<HeaderProps> = ({ location, title }) => {
   const rootPath = `${__PATH_PREFIX__}/`
 
