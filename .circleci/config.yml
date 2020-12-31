@@ -1,0 +1,88 @@
+version: 2.1
+# https://circleci.com/blog/publishing-npm-packages-using-circleci-2-0/ -- "Setting Defaults"
+defaults: &defaults
+  working_directory: ~/repo
+  # Yarn has been preinstalled with this image; no need to explicitly install
+  docker:
+    - image: circleci/node:15.5.0
+jobs:
+  install_deps:
+    <<: *defaults
+    steps:
+      - checkout
+      # https://circleci.com/docs/2.0/yarn/#caching
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install --immutable
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      # https://circleci.com/docs/2.0/configuration-reference/#persist_to_workspace
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - "."
+  test:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Run type checks
+          command: |
+            yarn tsc
+  build:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Build static site assets
+          command: yarn build
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - "."
+  deploy:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Install AWS CLI
+          # https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html#cliv2-linux-prereq
+          command: |
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+            unzip awscliv2.zip
+            sudo ./aws/install
+            aws --version
+            aws configure set aws_access_key_id ${AWS_ACCCESS_KEY_ID}
+            aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}
+      - run:
+          name: Deploy to S3 bucket
+          command: |
+            aws s3 sync public/ s3://${AWS_S3_BUCKET_NAME} --delete
+            echo "Build now live at https://lukerogerson.me"
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - install_deps
+      - test:
+          requires:
+            - install_deps
+      - build:
+          requires:
+            - install_deps
+            - test
+      - deploy:
+          requires:
+            - install_deps
+            - test
+            - build

@@ -25,7 +25,7 @@ const BlogIndex: React.FC<Props> = ({ location, data }) => {
     <Layout location={location} title={siteTitle}>
       <SEO title='All posts' />
 
-      {posts.map(({ node }) => {
+      {posts.map(({ node }: { node: Props['data']['allMarkdownRemark'] }) => {
         const title = node.frontmatter.title || node.fields.slug
         return (
           <article key={node.fields.slug}>
