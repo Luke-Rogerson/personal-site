@@ -5,6 +5,8 @@ import { Layout } from '../components/Layout'
 import SEO from '../components/Seo'
 import { rhythm } from '../utils/typography'
 
+import { Header } from '../components/Header'
+
 interface Props {
   location: Location
   data: {
@@ -24,7 +26,7 @@ const BlogIndex: React.FC<Props> = ({ location, data }) => {
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title='All posts' />
-
+      <Header location={location} />
       {posts.map(({ node }: { node: Props['data']['allMarkdownRemark'] }) => {
         const title = node.frontmatter.title || node.fields.slug
         return (

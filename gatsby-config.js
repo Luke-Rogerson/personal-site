@@ -12,13 +12,6 @@ module.exports = {
     },
   },
   plugins: [
-    {
-      resolve: `gatsby-plugin-s3`,
-      options: {
-        bucketName: 'lukerogerson.me',
-      },
-    },
-
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-typescript`,
     `gatsby-plugin-react-helmet`,

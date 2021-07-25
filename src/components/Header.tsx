@@ -6,7 +6,7 @@ import { rhythm } from '../utils/typography'
 
 interface HeaderProps {
   location?: Location
-  title: string
+  title?: string
 }
 
 const Container = styled.div`
@@ -63,7 +63,7 @@ export const Header: React.FC<HeaderProps> = ({ location, title }) => {
               margin: 0,
             }}
           >
-            {title}
+            {title ?? 'Luke Rogerson'}
           </h1>
         </Container>
       </Link>
@@ -98,7 +98,7 @@ export const Header: React.FC<HeaderProps> = ({ location, title }) => {
               margin: 0,
             }}
           >
-            {title}
+            {title ?? 'Luke Rogerson'}
           </h3>
         </Container>
       </Link>
