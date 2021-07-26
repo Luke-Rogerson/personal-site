@@ -2,7 +2,7 @@ import React from 'react'
 import { graphql } from 'gatsby'
 
 import { Layout } from '../components/Layout'
-import SEO from '../components/Seo'
+import SEO from '../components/SEO'
 
 interface Props {
   data: {

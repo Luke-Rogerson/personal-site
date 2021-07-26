@@ -12,6 +12,7 @@ module.exports = {
     },
   },
   plugins: [
+    `gatsby-plugin-remove-serviceworker`,
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-typescript`,
     `gatsby-plugin-react-helmet`,
@@ -72,7 +73,6 @@ module.exports = {
         icon: `content/assets/favicon.png`,
       },
     },
-    `gatsby-plugin-offline`,
     {
       resolve: `gatsby-plugin-typography`,
       options: {

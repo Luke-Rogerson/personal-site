@@ -22,7 +22,7 @@ export const Header: React.FC<HeaderProps> = ({ location, title }) => {
 
   const data = useStaticQuery(graphql`
     query AvatarQuery {
-      avatar: file(absolutePath: { regex: "/profile-pic.jpg/" }) {
+      avatar: file(relativePath: { eq: "profile-pic.jpg" }) {
         childImageSharp {
           fixed {
             ...GatsbyImageSharpFixed
