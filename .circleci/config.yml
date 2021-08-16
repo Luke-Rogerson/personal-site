@@ -28,7 +28,7 @@ jobs:
           root: ~/repo
           paths:
             - "."
-  test:
+  type_check:
     <<: *defaults
     steps:
       - attach_workspace:
@@ -37,6 +37,15 @@ jobs:
           name: Run type checks
           command: |
             yarn tsc
+  e2e_tests:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Run Cypress e2e tests
+          command: |
+            yarn test:e2e:ci
   build:
     <<: *defaults
     steps:
@@ -74,17 +83,19 @@ workflows:
   build_and_deploy:
     jobs:
       - install_deps
-      - test:
+      - type_check:
+          requires:
+            - install_deps
+      - e2e_tests:
           requires:
             - install_deps
       - build:
           requires:
             - install_deps
-            - test
+            - type_check
+            - e2e_tests
       - deploy:
           requires:
-            - install_deps
-            - test
             - build
           # https://circleci.com/docs/2.0/configuration-reference/#filters
           filters:

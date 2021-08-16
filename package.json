@@ -47,6 +47,7 @@
     "@types/jest": "^27.0.1",
     "@types/react-helmet": "^5.0.10",
     "@types/styled-components": "^4.4.2",
+    "@types/typography": "^0.16.4",
     "@typescript-eslint/eslint-plugin": "^2.3.2",
     "@typescript-eslint/parser": "^2.3.2",
     "babel-jest": "^27.0.6",
@@ -77,6 +78,8 @@
     "serve": "gatsby serve",
     "lint": "eslint --ignore-path .gitignore . --ext ts --ext tsx --ext js --ext jsx",
     "tsc": "tsc --noEmit",
-    "test:e2e:ci": "start-server-and-test dev http://localhost:8000 cypress:run"
+    "cyrun": "yarn cypress run",
+    "cyopen": "yarn cypress open",
+    "test:e2e:ci": "start-server-and-test 'yarn develop' http://localhost:8000 'yarn cyrun'"
   }
 }
