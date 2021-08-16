@@ -25,7 +25,8 @@
   },
   "include": [
     "./src/**/*",
-    "./cypress/**/*"
+    "./cypress/**/*",
+    "./@types/**/*"
   ],
   "exclude": [
     "*.js",
