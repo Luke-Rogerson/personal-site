@@ -83,6 +83,7 @@ workflows:
               ignore:
                 - master
       - cypress/run:
+          name: e2e_tests
           requires:
             - install_deps
           start: yarn develop
@@ -98,7 +99,7 @@ workflows:
           requires:
             - install_deps
             - type_check
-            - cypress/run
+            - e2e_tests
       - deploy:
           requires:
             - build
