@@ -1,8 +1,9 @@
 version: 2.1
+orbs:
+  cypress: cypress-io/cypress@1
 # https://circleci.com/blog/publishing-npm-packages-using-circleci-2-0/ -- "Setting Defaults"
-defaults: &defaults
-  working_directory: ~/repo
-  # Yarn has been preinstalled with this image; no need to explicitly install
+defaults:
+  &defaults # Yarn has been preinstalled with this image; no need to explicitly install
   docker:
     - image: circleci/node:15.5.0
 jobs:
@@ -25,14 +26,14 @@ jobs:
             - ~/.cache/yarn
       # https://circleci.com/docs/2.0/configuration-reference/#persist_to_workspace
       - persist_to_workspace:
-          root: ~/repo
+          root: .
           paths:
-            - "."
-  test:
+            - .
+  type_check:
     <<: *defaults
     steps:
       - attach_workspace:
-          at: ~/repo
+          at: .
       - run:
           name: Run type checks
           command: |
@@ -41,19 +42,19 @@ jobs:
     <<: *defaults
     steps:
       - attach_workspace:
-          at: ~/repo
+          at: .
       - run:
           name: Build static site assets
           command: yarn build
       - persist_to_workspace:
-          root: ~/repo
+          root: .
           paths:
             - "."
   deploy:
     <<: *defaults
     steps:
       - attach_workspace:
-          at: ~/repo
+          at: .
       - run:
           name: Install AWS CLI
           # https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html#cliv2-linux-prereq
@@ -71,20 +72,36 @@ jobs:
             echo "Build now live at https://lukerogerson.me"
 workflows:
   version: 2
-  build_and_deploy:
+  build_test_deploy:
     jobs:
       - install_deps
-      - test:
+      - type_check:
           requires:
             - install_deps
+          filters:
+            branches:
+              ignore:
+                - master
+      - cypress/run:
+          name: e2e_tests
+          requires:
+            - install_deps
+          start: yarn develop
+          wait-on: "http://localhost:8000"
+          yarn: true
+          cache-key: 'yarn-packages-{{ checksum "yarn.lock" }}'
+          store_artifacts: true
+          filters:
+            branches:
+              ignore:
+                - master
       - build:
           requires:
             - install_deps
-            - test
+            - type_check
+            - e2e_tests
       - deploy:
           requires:
-            - install_deps
-            - test
             - build
           # https://circleci.com/docs/2.0/configuration-reference/#filters
           filters:

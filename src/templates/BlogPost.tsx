@@ -37,14 +37,19 @@ const BlogPostTemplate: React.FC<BlogPostProps> = ({ location, data, pageContext
             {post.frontmatter.date}
           </p>
         </header>
-        <section dangerouslySetInnerHTML={{ __html: post.html }} />
+        <section
+          dangerouslySetInnerHTML={{ __html: post.html }}
+          data-cy='blog-post-content'
+        />
         <hr
           style={{
             marginBottom: rhythm(1),
           }}
         />
         <footer>
-          <Link to='/'>Go home</Link>
+          <Link to='/' data-cy='blog-home-link'>
+            Go home
+          </Link>
         </footer>
       </article>
 
@@ -60,14 +65,14 @@ const BlogPostTemplate: React.FC<BlogPostProps> = ({ location, data, pageContext
         >
           <li>
             {previous && (
-              <Link to={previous.fields.slug} rel='prev'>
+              <Link to={previous.fields.slug} rel='prev' data-cy='blog-previous-link'>
                 ← {previous.frontmatter.title}
               </Link>
             )}
           </li>
           <li>
             {next && (
-              <Link to={next.fields.slug} rel='next'>
+              <Link to={next.fields.slug} rel='next' data-cy='blog-next-link'>
                 {next.frontmatter.title} →
               </Link>
             )}

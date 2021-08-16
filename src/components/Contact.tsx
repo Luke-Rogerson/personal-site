@@ -43,8 +43,14 @@ export const Contact: React.FC = () => {
   const { github, linkedin, email } = contactData.site.siteMetadata.contacts
 
   return (
-    <Icons>
-      <Icon name='Blog' component={CreateIcon} color='primary' to='/blog' />
+    <Icons data-cy='contact-section'>
+      <Icon
+        name='Blog'
+        component={CreateIcon}
+        color='primary'
+        to='/blog'
+        data-cy='blog-icon'
+      />
       <Icon name='GitHub' component={GitHubIcon} href={github} />
       <Icon name='LinkedIn' component={LinkedInIcon} href={linkedin} />
       <Icon name='Contact Me' component={EmailIcon} href={`mailto:${email}`} />

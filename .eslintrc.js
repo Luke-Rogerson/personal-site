@@ -3,6 +3,7 @@ module.exports = {
   env: {
     browser: true,
     es6: true,
+    "jest/globals": true,
     node: true,
   },
   extends: [
@@ -11,6 +12,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'prettier/@typescript-eslint',
     'plugin:prettier/recommended',
+    'plugin:cypress/recommended'
   ],
   globals: {
     Atomics: 'readonly',
@@ -23,7 +25,7 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint', 'react'],
+  plugins: ['@typescript-eslint', 'cypress', 'jest', 'react'],
   rules: {
     '@typescript-eslint/explicit-function-return-type': 'off',
     'react/prop-types': 0,
