@@ -1,6 +1,6 @@
 ---
 title: A better Python logger for AWS Lambda
-date: '2021-19-31T14:45:00.284Z'
+date: '2021-10-31T14:45:00.284Z'
 description: A Python logging setup for AWS Lambda for better readability and `extra` fields
 ---
 
@@ -83,3 +83,6 @@ logger.info('An informative log message', extra={'user_id': 'abc123', **function
 ```
 
 Simply instantiate `use_logging` inside of your Lambda function, then the API for logs is the same as what you are useful with the regular Python logger!
+
+
+<img src="https://i.imgur.com/RujrHWm.png" alt="An example AWS CloudWatch log" style="zoom:80%;" />
